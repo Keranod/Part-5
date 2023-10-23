@@ -37,7 +37,7 @@ const mostBlogs = (blogs) => {
       author,
       blogs: _.countBy(blogs, 'author')[author] || 0
       // iterates over blogs counting by author property
-      // [author] retrives count from _.countBy
+      // [author] retrives count from _.countBy of that author
       // || 0 just in case if author does not exist
     }
   })
@@ -63,9 +63,28 @@ const mostBlogs = (blogs) => {
   return _.maxBy(authors, 'blogs')
 }
 
+const mostLikes = (blogs) => {
+    // same as above function
+  const authors = _.uniq(blogs.map(blog => blog.author)).map(author => {
+    return {
+      author,
+      likes: _.reduce(_.filter(blogs, { author }).map(blog => blog.likes), (sum, n) => {
+        return sum + n
+      }, 0)
+      // _.reduce sums likes
+      // _.filter itterates over blogs and filters only objects with author name
+      // .map creates array of likes for that author from each blog
+    }
+  })
+
+  // returns author object with highest count of likes
+  return _.maxBy(authors, 'likes')
+}
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 }
