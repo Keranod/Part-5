@@ -18,7 +18,7 @@ const favoriteBlog = (blogs) => {
   let blogWithMostLikes = blogs[0]
 
   blogs.forEach((blog) => {
-    if (blog.like > blogWithMostLikes.likes) {
+    if (blog.likes > blogWithMostLikes.likes) {
       blogWithMostLikes = blog
     }
   })
