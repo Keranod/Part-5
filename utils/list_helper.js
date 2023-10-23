@@ -29,37 +29,38 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
-  // get all authors names
-  // .map function creates new array of authors names
-  // _.unig gets only unique values
-  const authorsNames = _.uniq(blogs.map(blog => blog.author))
-
-  // array of objects containing authors names and amount of blogs they have on the list
-  const authors = authorsNames.map(author => {
+  // _.uniq gets only unique values
+  // .map function within _.uniq creates new array of authors names
+  // .map function of array created using _.uniq returns object with author name and blogs amount
+  const authors = _.uniq(blogs.map(blog => blog.author)).map(author => {
     return {
       author,
-      blogs: 0
+      blogs: _.countBy(blogs, 'author')[author] || 0
+      // iterates over blogs counting by author property
+      // [author] retrives count from _.countBy
+      // || 0 just in case if author does not exist
     }
   })
 
-  // count how many times his name appears
-  authors.forEach((author) => {
-    blogs.forEach((blog) => {
-      if (blog.author === author.author) {
-        author.blogs++
-      }
-    })
-  })
+  //   // array of objects containing authors names and amount of blogs they have on the list
+  //   const authors = authorsNames.map(author => {
+  //     return {
+  //       author,
+  //       blogs: 0
+  //     }
+  //   })
+
+  //   // count how many times his name appears
+  //   authors.forEach((author) => {
+  //     blogs.forEach((blog) => {
+  //       if (blog.author === author.author) {
+  //         author.blogs++
+  //       }
+  //     })
+  //   })
 
   // return author name and amount of blogs that he has on the list
-  let authorWithMostBlogs = authors[0]
-  authors.forEach((author) => {
-    if (authorWithMostBlogs.blogs < author.blogs) {
-      authorWithMostBlogs = author
-    }
-  })
-
-  return authorWithMostBlogs
+  return _.maxBy(authors, 'blogs')
 }
 
 module.exports = {
