@@ -52,4 +52,10 @@ describe('api calls', () => {
 
         expect(response.body).toHaveLength(initialBlogs.length)
     })
+
+    test('property named "id" exists', async () => {
+        const response = await api.get('/api/blogs')
+
+        expect(response.body[0].id).toBeDefined()
+    })
 })
