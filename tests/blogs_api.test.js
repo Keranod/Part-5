@@ -48,6 +48,6 @@ describe('api calls', () => {
             .expect(200)
             .expect('Content-Type', /application\/json/)
 
-        expect(blogs).toHaveLenght(initialBlogs.length)
+        expect(blogs).toHaveLength(initialBlogs.length)
     })
 })
