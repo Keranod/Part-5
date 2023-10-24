@@ -78,4 +78,22 @@ describe('api calls', () => {
         expect(response.body).toHaveLength(initialBlogs.length + 1)
         expect(response.body.at(-1).title).toEqual(newBlog.title)
     })
+
+    test('likes property is missing from HTTP POST', async () => {
+        const newBlog = {
+            title: 'HTTP POST likes missing',
+            author: 'my by my',
+            url: 'hmmmmm.oo'
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
+
+        const response = await api.get('/api/blogs')
+
+        expect(response.body.find((blog) => blog.title === 'HTTP POST likes missing')).toEqual(0)
+    })
 })
