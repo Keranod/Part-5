@@ -75,7 +75,7 @@ describe('api calls', () => {
 
         const response = await api.get('/api/blogs')
 
-        expect(response).toHaveLength(initialBlogs.toHaveLength + 1)
-        expect(response.at(-1).title).toEqual(newBlog.title)
+        expect(response.body).toHaveLength(initialBlogs.toHaveLength + 1)
+        expect(response.body.at(-1).title).toEqual(newBlog.title)
     })
 })
