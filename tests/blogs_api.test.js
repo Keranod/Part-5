@@ -58,4 +58,23 @@ describe('api calls', () => {
 
         expect(response.body[0].id).toBeDefined()
     })
+
+    test('HTTP POST request to blogs', async () => {
+        const newBlog = {
+            title: 'HTTP POST worked',
+            author: 'my by my',
+            url: 'hmmmmm.oo',
+            likes: 90253
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(400)
+
+        const response = await api.get('/api/blogs')
+
+        expect(response).toHaveLength(initialBlogs.toHaveLength + 1)
+        expect(response.at(-1).title).toEqual(newBlog.title)
+    })
 })
