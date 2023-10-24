@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -96,4 +97,24 @@ describe('api calls', () => {
 
         expect(response.body.find((blog) => blog.title === 'HTTP POST likes missing').likes).toEqual(0)
     })
+
+    test('title is missing from POST', async () => {
+        const newBlog = {
+            author: 'Title is missing',
+            url: 'hmmmmm.oo'
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(400)
+            .expect('Content-Type', /application\/json/)
+    })
+
+    // test('url is missing from POST', async () => {
+    //     const newBlog = {
+    //         title: 'HTTP POST likes missing',
+    //         author: 'Url is missing'
+    //     }
+    // })
 })
