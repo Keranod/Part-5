@@ -94,6 +94,6 @@ describe('api calls', () => {
 
         const response = await api.get('/api/blogs')
 
-        expect(response.body.find((blog) => blog.title === 'HTTP POST likes missing').id).toEqual(0)
+        expect(response.body.find((blog) => blog.title === 'HTTP POST likes missing').likes).toEqual(0)
     })
 })
