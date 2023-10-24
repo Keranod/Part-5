@@ -42,10 +42,12 @@ beforeEach(async () => {
 })
 
 describe('api calls', () => {
-    test('blogs are returned as json', async () => {
-        await api
+    test('blogs lenght is correct and returned format is json', async () => {
+        const blogs = await api
             .get('/api/blogs')
             .expect(200)
             .expect('Content-Type', /application\/json/)
+
+        expect(blogs).toHaveLenght(initialBlogs.length)
     })
 })
