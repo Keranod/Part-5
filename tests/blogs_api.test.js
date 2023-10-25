@@ -129,6 +129,7 @@ describe('api calls', () => {
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
             .expect(204)
+
         const blogsAtEnd = await helper.blogsInDb()
 
         expect(blogsAtEnd).toHaveLength(
@@ -136,7 +137,7 @@ describe('api calls', () => {
         )
 
         const contents = blogsAtEnd.map(r => r.content)
-        console.log(blogToDelete.content)
+        // console.log(blogToDelete.content)
         expect(contents).not.toContain(blogToDelete.content)
     })
 })
