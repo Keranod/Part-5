@@ -124,7 +124,7 @@ describe('api calls', () => {
 
     test('deletion of blog with specific id', async () => {
         const blogs = await api.get('/api/blogs')
-        const blogsAtStart = blogs.map(blog => blog.toJSON())
+        const blogsAtStart = blogs.body.map(blog => blog.toJSON())
 
         const blogToDelete = blogsAtStart[0]
 
