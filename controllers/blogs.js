@@ -62,7 +62,7 @@ blogsRouter.put(':/id', async (request, response) => {
     //     likes: body.likes
     // })
 
-    const updatedBlog = Blog.findByIdAndUpdate(request.params.id,
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id,
         { title, likes },
         { runValidators: true, context: 'query' }
     )
