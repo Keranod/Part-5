@@ -132,7 +132,8 @@ describe('api calls', () => {
 
         const blogsAtEnd = await helper.blogsInDb()
 
-        console.log(blogsAtEnd)
+        // console.log(blogsAtEnd)
+        console.log(blogToDelete)
 
         expect(blogsAtEnd).toHaveLength(
             initialBlogs.length - 1
