@@ -133,15 +133,15 @@ describe('api calls', () => {
         const blogsAtEnd = await helper.blogsInDb()
 
         // console.log(blogsAtEnd)
-        console.log(blogToDelete)
+        // console.log(blogToDelete)
 
         expect(blogsAtEnd).toHaveLength(
             initialBlogs.length - 1
         )
 
-        const contents = blogsAtEnd.map(r => r.content)
+        // const contents = blogsAtEnd.map(r => r.content)
         // console.log(blogToDelete.content)
-        expect(contents).not.toContain(blogToDelete.content)
+        expect(blogsAtEnd).not.toContain(blogToDelete.content)
     })
 })
 
