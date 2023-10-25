@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
 
@@ -123,15 +124,13 @@ describe('api calls', () => {
     })
 
     test('deletion of blog with specific id', async () => {
-        const blogs = await api.get('/api/blogs')
-        const blogsAtStart = blogs.body.map(blog => blog.toJSON())
-
+        const blogsAtStart = await helper.blogsInDb()
         const blogToDelete = blogsAtStart[0]
 
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
             .expect(204)
-        const blogsAtEnd = await api.get('/api/blogs').map(blog => blog.toJSON())
+        const blogsAtEnd = await helper.blogsInDb()
 
         expect(blogsAtEnd).toHaveLength(
             initialBlogs.length - 1
