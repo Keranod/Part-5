@@ -148,7 +148,7 @@ describe('api calls', () => {
             likes: -150
         }
 
-        console.log(blogToUpdate.id)
+        // console.log(blogToUpdate.id)
 
         await api
             .put(`/api/blogs/${blogToUpdate.id}`)
