@@ -156,7 +156,7 @@ describe('api calls', () => {
         const updatedBlog = await api
             .get(`/api/blogs/${blogToUpdate.id}`)
 
-            console.log(updatedBlog)
+            console.log(updatedBlog.body)
         expect(updatedBlog.likes).toEqual(newBlogData.likes)
     })
 })
