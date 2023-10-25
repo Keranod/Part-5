@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const helper = require('./test_helper')
@@ -140,4 +139,8 @@ describe('api calls', () => {
         console.log(blogToDelete.content)
         expect(contents).not.toContain(blogToDelete.content)
     })
+})
+
+afterAll(async () => {
+    await mongoose.connection.close()
 })
