@@ -40,4 +40,34 @@ blogsRouter.delete('/:id', async (request, response) => {
     response.status(204).end()
 })
 
+blogsRouter.put(':/id', async (request, response) => {
+    const body = request.body
+
+    if (!body.title) {
+        return response.status(400).end().json({ error: 'Missing title property' })
+    }
+
+    const title = body.title
+
+    let likes = 0
+
+    if (body.likes) {
+        likes = body.likes
+    }
+
+    // const blog = new Blog({
+    //     title: body.title,
+    //     author: body.author,
+    //     url: body.url,
+    //     likes: body.likes
+    // })
+
+    const updatedBlog = Blog.findByIdAndUpdate(request.params.id,
+        { title, likes },
+        { runValidators: true, context: 'query' }
+    )
+
+    response.status(200).json(updatedBlog)
+})
+
 module.exports = blogsRouter

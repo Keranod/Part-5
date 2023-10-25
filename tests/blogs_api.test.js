@@ -132,16 +132,31 @@ describe('api calls', () => {
 
         const blogsAtEnd = await helper.blogsInDb()
 
-        // console.log(blogsAtEnd)
-        // console.log(blogToDelete)
-
         expect(blogsAtEnd).toHaveLength(
             initialBlogs.length - 1
         )
 
-        // const contents = blogsAtEnd.map(r => r.content)
-        // console.log(blogToDelete.content)
         expect(blogsAtEnd).not.toContain(blogToDelete.content)
+    })
+
+    test('update blog likes', async () => {
+        const blogs = await helper.blogsInDb()
+        const blogToUpdate = blogs[0]
+
+        const newBlogData = {
+            title: blogToUpdate.title,
+            likes: -150
+        }
+
+        await api
+            .put(`/api/blogs/${blogToUpdate}`)
+            .send(newBlogData)
+            .expect(200)
+
+        const updatedBlog = await api
+            .get(`/api/blogs/:${blogToUpdate.id}`)
+
+        expect(updatedBlog.likes).toEqual(newBlogData.likes)
     })
 })
 
