@@ -154,7 +154,7 @@ describe('api calls', () => {
             .expect(200)
 
         const updatedBlog = await api
-            .get(`/api/blogs/${blogToUpdate.id}`).body
+            .get(`/api/blogs/${blogToUpdate.id}`)
 
         expect(updatedBlog.likes).toEqual(newBlogData.likes)
     })
