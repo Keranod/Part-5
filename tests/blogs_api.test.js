@@ -110,10 +110,15 @@ describe('api calls', () => {
             .expect(400)
     })
 
-    // test('url is missing from POST', async () => {
-    //     const newBlog = {
-    //         title: 'HTTP POST likes missing',
-    //         author: 'Url is missing'
-    //     }
-    // })
+    test('url is missing from POST', async () => {
+        const newBlog = {
+            title: 'HTTP POST likes missing',
+            author: 'Url is missing'
+        }
+
+        await api
+            .post('/api/blogs')
+            .send(newBlog)
+            .expect(400)
+    })
 })
