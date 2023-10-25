@@ -149,7 +149,7 @@ describe('api calls', () => {
         }
 
         await api
-            .put(`/api/blogs/${blogToUpdate}`)
+            .put(`/api/blogs/${blogToUpdate.id}`)
             .send(newBlogData)
             .expect(200)
 
