@@ -121,4 +121,22 @@ describe('api calls', () => {
             .send(newBlog)
             .expect(400)
     })
+
+    test('deletion of blog with specific id', async () => {
+        const blogsAtStart = await api.get('/api/blogs').map(blog => blog.toJSON())
+        const blogToDelete = blogsAtStart[0]
+
+        await api
+            .delete(`/api/blogs/${blogToDelete.id}`)
+            .expect(204)
+        const blogsAtEnd = await api.get('/api/blogs').map(blog => blog.toJSON())
+
+        expect(blogsAtEnd).toHaveLength(
+            initialBlogs.length - 1
+        )
+
+        const contents = blogsAtEnd.map(r => r.content)
+        console.log(blogToDelete.content)
+        expect(contents).not.toContain(blogToDelete.content)
+    })
 })
