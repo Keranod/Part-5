@@ -13,7 +13,7 @@ blogsRouter.post('/', async (request, response) => {
     const body = request.body
 
     if (!body.title) {
-        return response.status(400)
+        return response.status(400).end()
     }
 
     if (!body.likes) {
