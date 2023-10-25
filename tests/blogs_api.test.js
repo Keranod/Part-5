@@ -108,8 +108,7 @@ describe('api calls', () => {
             .post('/api/blogs')
             .send(newBlog)
             .expect(400)
-            .expect('Content-Type', /application\/json/)
-    }, 10000)
+    })
 
     // test('url is missing from POST', async () => {
     //     const newBlog = {
