@@ -6,8 +6,8 @@ usersRouter.post('/', async (request, response) => {
     const { username, name, password } = request.body
 
     if (!username) {
-        response.statusMessage = 'username property is missing'
-        return response.status(400).end()
+        const errorMessage = 'username property is missing'
+        return response.status(400).send(errorMessage)
     }
 
     if (!password) {
