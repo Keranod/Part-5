@@ -1,5 +1,6 @@
 POST http://ec2-35-178-178-115.eu-west-2.compute.amazonaws.com/api/blogs 
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..9Me_s0ZuZ86EJjKWtGd2ctUXkJbW9lSRwA_nerY_x0U
 
 {
     "title": "Authentication based added blog",
