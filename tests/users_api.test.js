@@ -23,7 +23,21 @@ describe('api users bad calls', () => {
             .send(newUser)
             .expect(400)
 
-        console.log(response.body)
+        expect(response.body.error).toEqual('username property is missing')
+    })
+
+    test('missing password property', async () => {
+        const newUser = {
+            username: 'Him',
+            name: 'Missing Username'
+        }
+
+        const response = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+
+        expect(response.body.error).toEqual('password property is missing')
     })
 })
 

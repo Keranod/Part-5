@@ -13,18 +13,24 @@ usersRouter.post('/', async (request, response) => {
     }
 
     if (!password) {
-        response.statusMessage = 'password property is missing'
-        return response.status(400).end()
+        const errorMessage = 'password property is missing'
+        return response.status(400).send({
+            error: errorMessage
+        })
     }
 
     if (username.length < 3) {
-        response.statusMessage = 'username must be at least 3 characters long'
-        return response.status(400).end()
+        const errorMessage = 'username must be at least 3 characters long'
+        return response.status(400).send({
+            error: errorMessage
+        })
     }
 
     if (password.length < 3) {
-        response.statusMessage = 'password must be at least 3 characters long'
-        return response.status(400).end()
+        const errorMessage = 'password must be at least 3 characters long'
+        return response.status(400).send({
+            error: errorMessage
+        })
     }
 
     const saltRounds = 10
