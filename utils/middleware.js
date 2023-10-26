@@ -31,10 +31,14 @@ const errorHandler = (error, request, response, next) => {
 const tokenExtractor = (request, response, next) => {
     const authorization = request.get('authorization')
     if (authorization && authorization.startsWith('Bearer ')) {
-        return authorization.replace('Bearer ', '')
+        const token = authorization.replace('Bearer ', '')
+        request.token = token
+        return next()
     }
 
-    next()
+    return response.status(401).json({
+        erros: 'Unauthorized token'
+    })
 }
 
 module.exports = {
