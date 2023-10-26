@@ -1,0 +1,9 @@
+POST http://ec2-35-178-178-115.eu-west-2.compute.amazonaws.com/api/blogs 
+content-type: application/json
+
+{
+    "title": "Authentication based added blog",
+    "author": "He being himself",
+    "url": "some-random-url.org",
+    "likes": 12
+}
