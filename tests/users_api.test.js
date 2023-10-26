@@ -39,6 +39,36 @@ describe('api users bad calls', () => {
 
         expect(response.body.error).toEqual('password property is missing')
     })
+
+    test('username shorter than 3 chars', async () => {
+        const newUser = {
+            username: 'rt',
+            name: 'to short',
+            password: 'kiloogorkow'
+        }
+
+        const response = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+
+        expect(response.body.error).toEqual('username must be at least 3 characters long')
+    })
+
+    test('password shorter than 3 chars', async () => {
+        const newUser = {
+            username: 'root',
+            name: 'to short',
+            password: '12'
+        }
+
+        const response = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+
+        expect(response.body.error).toEqual('password must be at least 3 characters long')
+    })
 })
 
 afterAll(async () => {
