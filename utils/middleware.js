@@ -29,18 +29,14 @@ const errorHandler = (error, request, response, next) => {
 }
 
 const tokenExtractor = (request, response, next) => {
-    console.log(request.body)
     const authorization = request.get('authorization')
-    console.log(authorization)
+
     if (authorization && authorization.startsWith('Bearer ')) {
         const token = authorization.replace('Bearer ', '')
         request.token = token
-        return next()
     }
 
-    return response.status(401).json({
-        erros: 'Unauthorized token'
-    })
+    return next(request.token)
 }
 
 module.exports = {
