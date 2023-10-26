@@ -79,7 +79,7 @@ describe('api users bad calls', () => {
             .expect(400)
 
         // expect(response.body.error).toEqual('ValidationError')
-    }, 10000)
+    })
 })
 
 afterAll(async () => {
