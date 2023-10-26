@@ -69,6 +69,17 @@ describe('api users bad calls', () => {
 
         expect(response.body.error).toEqual('password must be at least 3 characters long')
     })
+
+    test('username is not unique', async () => {
+        const newUser = helper.initialUsers[0]
+
+        const response = await api
+            .post('/api/users')
+            .send(newUser)
+            .expect(400)
+
+        expect(response.body.error).toEqual('ValidationError')
+    })
 })
 
 afterAll(async () => {
