@@ -78,7 +78,7 @@ describe('api users bad calls', () => {
             .send(newUser)
             .expect(400)
 
-        // expect(response.body.error).toEqual('ValidationError')
+        expect(response.body.error).toContain('User validation failed: username: Error, expected `username` to be unique.')
     })
 })
 
