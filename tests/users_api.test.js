@@ -23,7 +23,7 @@ describe('api users bad calls', () => {
             .send(newUser)
             .expect(400)
 
-        console.log(response.statusMessage)
+        console.log(response.body)
     })
 })
 
