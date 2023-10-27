@@ -169,6 +169,21 @@ describe('api calls', () => {
         // console.log(updatedBlog.body)
         expect(updatedBlog.body.likes).toEqual(newBlogData.likes)
     })
+
+    test('fail adding blog without a token', async () => {
+        const newBlog = {
+            title: 'HTTP POST worked',
+            author: 'my by my',
+            url: 'hmmmmm.oo',
+            likes: 90253
+        }
+
+        await api
+            .post('/api/blogs')
+            .set('content-type', 'application/json')
+            .send(newBlog)
+            .expect(401)
+    })
 })
 
 afterAll(async () => {
