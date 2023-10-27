@@ -42,6 +42,7 @@ beforeEach(async () => {
                 .set('Authorization', `Bearer ${token}`)
                 .send(blog)
                 // cannot check expects, if expect(201) gets 500 if I check for 500 i get 201. Does not make sense
+                // but it works in test, only not here
         })
     )
 })
