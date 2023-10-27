@@ -20,7 +20,7 @@ beforeAll(async () => {
         .send(usersHelper.initialUsers[0])
         .expect(200)
 
-    const user = response.request.user
+    const user = response.body.user
 
     console.log(user)
 })
