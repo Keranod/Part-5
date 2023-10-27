@@ -97,6 +97,7 @@ describe('api calls', () => {
             .post('/api/blogs')
             .send(newBlog)
             .expect(201)
+            .set('Authorization', `Bearer ${token}`)
             .expect('Content-Type', /application\/json/)
 
         const response = await api.get('/api/blogs')
@@ -134,6 +135,7 @@ describe('api calls', () => {
 
         await api
             .delete(`/api/blogs/${blogToDelete.id}`)
+            .set('Authorization', `Bearer ${token}`)
             .expect(204)
 
         const blogsAtEnd = await helper.blogsInDb()
