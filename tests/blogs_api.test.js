@@ -7,6 +7,7 @@ const api = supertest(app)
 
 const Blog = require('../models/blog')
 
+// token will give me username and _id object
 // to add new blog i need token
 // token is acquired after succesful login +
 // sucessful login is after sending correct username and password +
@@ -35,12 +36,14 @@ beforeEach(async () => {
 
     await Promise.all(
         helper.initialBlogs.map(async (blog) => {
-            await api
+            const response = await api
                 .post('/api/blogs')
                 .set('Content-Type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send(blog)
                 .expect(201)
+                
+                console.log(response)
         })
     )
 })
