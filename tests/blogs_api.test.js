@@ -17,8 +17,6 @@ const initialBlogs = helper.initialBlogs
 
 let token = null
 
-let apiResponse = null
-
 beforeAll(async () => {
     const request = await api
         .post('/api/login')
@@ -38,17 +36,17 @@ beforeEach(async () => {
 
     await Promise.all(
         helper.initialBlogs.map(async (blog) => {
-            apiResponse = await api
+            const apiResponse = await api
                 .post('/api/blogs')
                 .set('content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send(blog)
                 .expect(201)
+
+                console.log(apiResponse)
         })
     )
 })
-
-console.log(apiResponse)
 
 describe('api calls', () => {
     test('blogs lenght is correct and returned format is json', async () => {
