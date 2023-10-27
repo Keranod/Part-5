@@ -8,7 +8,15 @@ const User = require('../models/user')
 
 beforeEach(async () => {
     await User.deleteMany({})
-    await User.insertMany(helper.initialUsers)
+    // await User.insertMany(helper.initialUsers)
+    await Promise.all(
+        helper.initialUsers.forEach(user => {
+            api
+                .post('/api/users')
+                .send(user)
+                .expect(201)
+        })
+    )
 })
 
 describe('api users bad calls', () => {

@@ -6,6 +6,11 @@ const api = supertest(app)
 
 const Blog = require('../models/blog')
 
+// to add new blog i need token
+// token is acquired after succesful login
+// sucessful login is after sending correct username and password
+// adding 
+
 const initialBlogs = [
     {
         title: 'Test title blog 1',
