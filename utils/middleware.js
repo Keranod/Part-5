@@ -36,7 +36,7 @@ const tokenExtractor = (request, response, next) => {
     if (!authorization) {
         return response.status(401).json({
             error: 'Unauthorized'
-        }
+        })
     }
 
     if (authorization && authorization.startsWith('Bearer ')) {
