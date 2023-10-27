@@ -38,7 +38,7 @@ const tokenExtractor = (request, response, next) => {
         request.token = token
     }
 
-    return next()
+    next()
 }
 
 const userExtractor = async (request, response, next) => {
@@ -56,7 +56,7 @@ const userExtractor = async (request, response, next) => {
 
     request.user = user
 
-    return next()
+    next()
 }
 
 module.exports = {
