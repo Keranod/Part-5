@@ -11,6 +11,7 @@ beforeEach(async () => {
     // await User.insertMany(helper.initialUsers)
     await Promise.all(
         helper.initialUsers.forEach(user => {
+            console.log(user)
             api
                 .post('/api/users')
                 .send(user)
