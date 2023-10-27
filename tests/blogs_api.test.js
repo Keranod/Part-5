@@ -36,6 +36,8 @@ beforeEach(async () => {
 
     await Promise.all(
         helper.initialBlogs.map(async (blog) => {
+            console.log(blog)
+            console.log(token)
             await api
                 .post('/api/blogs')
                 .set('content-type', 'application/json')
