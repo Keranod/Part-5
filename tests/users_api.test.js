@@ -10,9 +10,8 @@ beforeEach(async () => {
     await User.deleteMany({})
     // await User.insertMany(helper.initialUsers)
     await Promise.all(
-        helper.initialUsers.forEach(user => {
-            console.log(user)
-            api
+        helper.initialUsers.map(async (user) => {
+            await api
                 .post('/api/users')
                 .send(user)
                 .expect(201)
