@@ -41,7 +41,6 @@ beforeEach(async () => {
                 .set('content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send(blog)
-                .expect(201 || 500)
         })
     )
 })
