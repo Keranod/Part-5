@@ -41,6 +41,7 @@ beforeEach(async () => {
                 .set('content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send(blog)
+                // cannot check expects, if expect(201) gets 500 if I check for 500 i get 201. Does not make sense
         })
     )
 })
@@ -73,6 +74,8 @@ describe('api calls', () => {
 
         await api
             .post('/api/blogs')
+            .set('content-type', 'application/json')
+            .set('Authorization', `Bearer ${token}`)
             .send(newBlog)
             .expect(201)
             .expect('Content-Type', /application\/json/)
