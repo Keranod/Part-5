@@ -1,42 +1,27 @@
 const supertest = require('supertest')
 const mongoose = require('mongoose')
 const helper = require('./test_helper')
+const usersHelper = require('./users_test_helper.js')
 const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
 
 // to add new blog i need token
-// token is acquired after succesful login
+// token is acquired after succesful login +?
 // sucessful login is after sending correct username and password
 // adding 
 
-const initialBlogs = [
-    {
-        title: 'Test title blog 1',
-        author: 'Me starring myself',
-        url: 'some-random-url.pl',
-        likes: 231
-    },
-    {
-        title: 'Test title blog 2',
-        author: 'You being youself',
-        url: 'some-random-url.com',
-        likes: 231123
-    },
-    {
-        title: 'Test title blog 3',
-        author: 'He being himself',
-        url: 'some-random-url.org',
-        likes: 231123123
-    },
-    {
-        title: 'Test title blog 4',
-        author: 'She being herself',
-        url: 'some-random-url.io',
-        likes: 3464574
-    }
-]
+const initialBlogs = helper.initialBlogs
+
+const login = await api
+    .post('/api/login')
+    .send(usersHelper.initialUsers[0])
+    .expect(200)
+
+const user = login.request.user
+
+console.log(user)
 
 beforeEach(async () => {
     await Blog.deleteMany({})
