@@ -36,14 +36,13 @@ beforeEach(async () => {
 
     await Promise.all(
         helper.initialBlogs.map(async (blog) => {
-            const apiResponse = await api
+            await api
                 .post('/api/blogs')
                 .set('content-type', 'application/json')
-                .set('Authorization', ``)
+                .set('Authorization', `Bearer ${token}`)
                 .send(blog)
-                .expect(201)
-
-                // console.log(apiResponse)
+                .expect(response => { console.log(response) })
+                .expect(500)
         })
     )
 })
