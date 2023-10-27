@@ -33,15 +33,13 @@ const errorHandler = (error, request, response, next) => {
 const tokenExtractor = (request, response, next) => {
     const authorization = request.get('authorization')
 
-    if (!authorization) {
-        return response.status(401).json({
-            error: 'Unauthorized'
-        })
-    }
-
     if (authorization && authorization.startsWith('Bearer ')) {
         const token = authorization.replace('Bearer ', '')
         request.token = token
+    } else {
+        return response.status(401).json({
+            error: 'Unauthorized'
+        })
     }
 
     next()
