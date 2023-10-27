@@ -42,23 +42,21 @@ const tokenExtractor = (request, response, next) => {
 }
 
 const userExtractor = async (request, response, next) => {
-    // if (!request.token) {
+    if (request.token) {
+        const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
-    // }
+        if (!decodedToken.id) {
+            return response.status(401).json({ error: 'token invalid' })
+        }
 
-    const decodedToken = jwt.verify(request.token, process.env.SECRET)
+        const user = await User.findById(decodedToken.id)
 
-    if (!decodedToken.id) {
-        return response.status(401).json({ error: 'token invalid' })
+        if (!user) {
+            return response.status(401).json({ error: 'user does not exist' })
+        }
+
+        request.user = user
     }
-
-    const user = await User.findById(decodedToken.id)
-
-    if (!user) {
-        return response.status(401).json({ error: 'user does not exist' })
-    }
-
-    request.user = user
 
     next()
 }
