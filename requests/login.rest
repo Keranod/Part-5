@@ -2,6 +2,11 @@ POST http://ec2-35-178-178-115.eu-west-2.compute.amazonaws.com/api/login
 content-type: application/json
 
 {
-    "username": "root",
-    "password": "kiloogorkow"
+    "username": "notRoot",
+    "password": "zielonekorale"
 }
+
+# {
+#     "username": "root",
+#     "password": "kiloogorkow"
+# }
