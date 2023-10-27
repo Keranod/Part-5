@@ -43,7 +43,7 @@ beforeEach(async () => {
                 .send(blog)
                 .expect(201)
                 
-                console.log(response)
+                console.log(response.header)
         })
     )
 })
