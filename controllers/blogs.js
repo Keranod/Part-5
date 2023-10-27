@@ -38,8 +38,6 @@ blogsRouter.post('/', async (request, response) => {
     await user.save()
 
     response.status(201).json(savedBlog)
-
-    console.log(response)
 })
 
 blogsRouter.delete('/:id', async (request, response) => {
