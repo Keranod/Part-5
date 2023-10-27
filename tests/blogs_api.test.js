@@ -15,14 +15,12 @@ const Blog = require('../models/blog')
 const initialBlogs = helper.initialBlogs
 
 beforeAll(async () => {
-    const login = await api
+    const response = await api
         .post('/api/login')
         .send(usersHelper.initialUsers[0])
         .expect(200)
 
-    console.log(login)
-
-    const user = app.request.login
+    const user = response.request.user
 
     console.log(user)
 })
