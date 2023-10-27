@@ -97,8 +97,9 @@ describe('api calls', () => {
         await api
             .post('/api/blogs')
             .send(newBlog)
-            .expect(201)
+            .set('content-type', 'application/json')
             .set('Authorization', `Bearer ${token}`)
+            .expect(201)
             .expect('Content-Type', /application\/json/)
 
         const response = await api.get('/api/blogs')
