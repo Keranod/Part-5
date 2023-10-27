@@ -23,8 +23,6 @@ beforeAll(async () => {
         .expect(200)
 
     token = request.body.token
-
-    console.log(token)
 })
 
 beforeEach(async () => {
@@ -38,7 +36,7 @@ beforeEach(async () => {
     await Promise.all(
         helper.initialBlogs.map(async (blog) => {
             await api
-                .post('/api/users')
+                .post('/api/blogs')
                 .set('Content-Type', 'application/json')
                 .set('Autorization', `Bearer ${token}`)
                 .send(blog)
