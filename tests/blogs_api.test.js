@@ -38,7 +38,7 @@ beforeEach(async () => {
             await api
                 .post('/api/blogs')
                 .set('Content-Type', 'application/json')
-                .set('Autorization', `Bearer ${token}`)
+                .set('Authorization', `Bearer ${token}`)
                 .send(blog)
                 .expect(201)
         })
