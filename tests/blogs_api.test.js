@@ -36,14 +36,12 @@ beforeEach(async () => {
 
     await Promise.all(
         helper.initialBlogs.map(async (blog) => {
-            const response = await api
+            await api
                 .post('/api/blogs')
-                .set('Content-Type', 'application/json')
+                .set('content-type', 'application/json')
                 .set('Authorization', `Bearer ${token}`)
                 .send(blog)
                 .expect(201)
-                
-                console.log(response.header)
         })
     )
 })
