@@ -8,11 +8,13 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 
 // to add new blog i need token
-// token is acquired after succesful login +?
-// sucessful login is after sending correct username and password
+// token is acquired after succesful login +
+// sucessful login is after sending correct username and password +
 // adding
 
 const initialBlogs = helper.initialBlogs
+
+let token = null
 
 beforeAll(async () => {
     const request = await api
@@ -20,7 +22,7 @@ beforeAll(async () => {
         .send(usersHelper.initialUsers[0])
         .expect(200)
 
-    const token = request.body.token
+    token = request.body.token
 
     console.log(token)
 })
@@ -28,10 +30,21 @@ beforeAll(async () => {
 beforeEach(async () => {
     await Blog.deleteMany({})
 
-    const blogObjects = initialBlogs
-        .map(blog => new Blog(blog))
-    const promiseArray = blogObjects.map(blog => blog.save())
-    await Promise.all(promiseArray)
+    // const blogObjects = initialBlogs
+    //     .map(blog => new Blog(blog))
+    // const promiseArray = blogObjects.map(blog => blog.save())
+    // await Promise.all(promiseArray)
+
+    await Promise.all(
+        helper.initialBlogs.map(async (blog) => {
+            await api
+                .post('/api/users')
+                .set('Content-Type', 'application/json')
+                .set('Autorization', `Bearer ${token}`)
+                .send(blog)
+                .expect(201)
+        })
+    )
 })
 
 describe('api calls', () => {
