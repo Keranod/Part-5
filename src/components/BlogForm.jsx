@@ -11,7 +11,7 @@ const BlogForm = ({ createBlog, userId }) => {
             title: title,
             author: author,
             url: url,
-            userId: userId
+            user: userId
           })
           
           setTitle('')
