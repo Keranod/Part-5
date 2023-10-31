@@ -37,6 +37,8 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blogObject)
 
+      console.log(returnedBlog)
+      returnedBlog.user = user
       setBlogs(blogs.concat(returnedBlog))
       setNotificationMessage(
         `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`
