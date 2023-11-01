@@ -38,7 +38,7 @@ const App = () => {
       const returnedBlog = await blogService.create(blogObject)
 
       console.log(returnedBlog)
-      returnedBlog.user = user
+      //returnedBlog.user = user
       setBlogs(blogs.concat(returnedBlog))
       setNotificationMessage(
         `a new blog ${returnedBlog.title} by ${returnedBlog.author} added`
@@ -102,7 +102,18 @@ const App = () => {
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
   }
-  
+
+  const handleLikeBlog = async (blogObject) => {
+    try {
+      const returnedBlog = await blogService.update(blogObject.id, blogObject)
+      //returnedBlog.user = user
+      const updatedBlogs = blogs.map((blog) =>
+        blog.id === returnedBlog.id ? returnedBlog : blog
+      )
+      setBlogs(updatedBlogs)
+    } catch {}
+  }
+
   if (user === null) {
     return (
       <LoginForm
@@ -138,7 +149,7 @@ const App = () => {
       </form>
       {blogForm()}
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} likeBlog={handleLikeBlog} />
       )}
     </div>
   )
