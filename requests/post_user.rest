@@ -1,8 +1,0 @@
-POST http://ec2-35-178-178-115.eu-west-2.compute.amazonaws.com/api/users
-content-type: application/json
-
-{
-    "username": "notRoot",
-    "name": "NotSuperuser",
-    "password": "zielonekorale"
-}
