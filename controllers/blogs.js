@@ -90,6 +90,8 @@ blogsRouter.put('/:id', async (request, response) => {
         { runValidators: true, context: 'query' }
     )
 
+    console.log(updatedBlog)
+
     response.status(200).json(updatedBlog)
 })
 
