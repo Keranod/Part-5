@@ -67,6 +67,10 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 blogsRouter.put('/:id', async (request, response) => {
+    if (!request.token) {
+        return response.status(401).send({ error: 'Unauthorized' })
+    }
+
     const body = request.body
 
     if (!body.title) {
