@@ -10,6 +10,7 @@ import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [sortedBlogs, setSortedBlogs] = useState([])
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -31,6 +32,11 @@ const App = () => {
       blogService.setToken(user.token)
     }
   }, [])
+
+  useEffect(() => {
+    const blogsSortedByLikes = blogs.slice().sort((a, b) => b.likes - a.likes) 
+    setSortedBlogs(blogsSortedByLikes)
+  }, [blogs])
 
   const handleCreateBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility()
@@ -148,7 +154,7 @@ const App = () => {
         </p>
       </form>
       {blogForm()}
-      {blogs.map(blog =>
+      {sortedBlogs.map(blog =>
         <Blog key={blog.id} blog={blog} likeBlog={handleLikeBlog} />
       )}
     </div>
