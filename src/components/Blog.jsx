@@ -1,46 +1,63 @@
-import { useState } from 'react'
-import blogService from '../services/blogs'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect } from 'react'
 
-const Blog = ({ blog, likeBlog }) => {
-  const [viewDetails, setViewDetails] = useState('none')
+const Blog = ({ blog, likeBlog, deleteBlog, loggedUser }) => {
+    const [viewDetails, setViewDetails] = useState('none')
+    const [showRemoveButton, setShowRemoveButton] = useState('none')
 
-  const toggleViewDetails = () => {
-    if (viewDetails === 'none') {
-      setViewDetails('')
-    } else {
-      setViewDetails('none')
+    useEffect(() => {
+    //console.log('inside of useeffect')
+        if (blog.user.username === loggedUser.username) {
+            //console.log('inside of useffect loop')
+            setShowRemoveButton('')
+        }
+    }, [])
+
+    const toggleViewDetails = () => {
+        if (viewDetails === 'none') {
+            setViewDetails('')
+        } else {
+            setViewDetails('none')
+        }
     }
-  }
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5
-  }
+    const blogStyle = {
+        paddingTop: 10,
+        paddingLeft: 2,
+        border: 'solid',
+        borderWidth: 1,
+        marginBottom: 5
+    }
 
-  const handleLikeBlog = async (blog) => {
-    console.log(blog)
-    const changedBlog = { ...blog, likes: ++blog.likes}
+    const handleLikeBlog = async (blog) => {
+        const changedBlog = { ...blog, likes: ++blog.likes }
 
-    likeBlog(changedBlog)
-  }
+        likeBlog(changedBlog)
+    }
 
-  return(
-  <div style={blogStyle}>
-    <div>
-      {blog.title} {blog.author}
-      <button onClick={toggleViewDetails}>view</button>
-    </div>
-    <div style={{ display: viewDetails }}>
-      {blog.url}<br/>
+    const handleDeleteBlog = async (blog) => {
+        if (window.confirm(`Do you want to delete blog "${blog.title}"?`)){
+            deleteBlog(blog)
+        }
+    }
+
+
+
+    return(
+        <div style={blogStyle}>
+            <div>
+                {blog.title} {blog.author}
+                <button onClick={toggleViewDetails}>view</button>
+            </div>
+            <div style={{ display: viewDetails }}>
+                {blog.url}<br/>
       likes {blog.likes}
-      <button onClick={() => handleLikeBlog(blog)}>like</button><br/>
-      {blog.user.name}
-    </div>
-  </div>  
-)}
+                <button onClick={() => handleLikeBlog(blog)}>like</button><br/>
+                {blog.user.name}<br/>
+                <button style={{ display: showRemoveButton }} onClick={() => handleDeleteBlog(blog)}>remove</button>
+            </div>
+        </div>
+    )}
 
 
 export default Blog
