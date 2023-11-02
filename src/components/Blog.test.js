@@ -21,9 +21,11 @@ describe('<Blog />', () => {
         username: 'Hades'
     }
 
+    const likeBlog = jest.fn()
+
     beforeEach(() => {
         container = render(
-            <Blog blog={blog} loggedUser={loggedUser} />
+            <Blog blog={blog} loggedUser={loggedUser} likeBlog={likeBlog} />
         ).container
     })
 
@@ -45,5 +47,15 @@ describe('<Blog />', () => {
 
         const div = container.querySelector('.viewDetails')
         expect(div).not.toHaveStyle('display: none')
+    })
+
+    test('like button pressed twice', async () => {
+        const user = userEvent.setup()
+
+        const likeButton = screen.getByText('like')
+        await user.click(likeButton)
+        await user.click(likeButton)
+
+        expect(likeBlog.mock.calls).toHaveLength(2)
     })
 })
