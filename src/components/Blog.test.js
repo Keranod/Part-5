@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Blog from './Blog'
 
-test('blog default render', () => {
+describe('<Blog />', () => {
     let container
 
     const blog = {
@@ -21,16 +21,29 @@ test('blog default render', () => {
         username: 'Hades'
     }
 
-    container = render(
-        <Blog blog={blog} loggedUser={loggedUser} />
-    ).container
+    beforeEach(() => {
+        container = render(
+            <Blog blog={blog} loggedUser={loggedUser} />
+        ).container
+    })
 
+    test('blog default render', () => {
 
-    const titleAuthor = screen.getByText(`${blog.title} ${blog.author}`)
+        const titleAuthor = screen.getByText(`${blog.title} ${blog.author}`)
 
-    expect(titleAuthor).toBeDefined()
+        expect(titleAuthor).toBeDefined()
 
-    const div = container.querySelector('.viewDetails')
+        const div = container.querySelector('.viewDetails')
 
-    expect(div).toHaveStyle('display: none')
+        expect(div).toHaveStyle('display: none')
+    })
+
+    test('URL and likes are shown after "view" pressed', async () => {
+        const user = userEvent.setup()
+        const button = screen.getByText('view')
+        await user.click(button)
+
+        const div = container.querySelector('.viewDetails')
+        expect(div).not.toHaveStyle('display: none')
+    })
 })
