@@ -49,9 +49,9 @@ const Blog = ({ blog, likeBlog, deleteBlog, loggedUser }) => {
                 {blog.title} {blog.author}
                 <button onClick={toggleViewDetails}>view</button>
             </div>
-            <div style={{ display: viewDetails }}>
+            <div style={{ display: viewDetails }} className='viewDetails'>
                 {blog.url}<br/>
-      likes {blog.likes}
+                likes {blog.likes}
                 <button onClick={() => handleLikeBlog(blog)}>like</button><br/>
                 {blog.user.name}<br/>
                 <button style={{ display: showRemoveButton }} onClick={() => handleDeleteBlog(blog)}>remove</button>
