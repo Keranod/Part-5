@@ -10,7 +10,7 @@ const LoginForm = ({
     notificationType
 }) => {
     return (
-        <div>
+        <div className='loginForm'>
             <h2>Log in to application</h2>
             <Notification
                 message={notificationMessage}
