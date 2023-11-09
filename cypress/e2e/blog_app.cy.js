@@ -55,7 +55,7 @@ describe('Blog app', function() {
             cy.contains(blogTitle)
         })
 
-        it.only('A blog can be liked', function() {
+        it('A blog can be liked', function() {
             const blogTitle = 'Blog Title Sample 2'
             cy.contains('new blog').click()
             cy.get('#logout')
@@ -67,6 +67,20 @@ describe('Blog app', function() {
             cy.get('#view').click()
             cy.get('#like').click()
             cy.contains('likes 1')
+        })
+
+        it.only('A blog can be deleted', function() {
+            const blogTitle = 'Blog Title Sample 2'
+            cy.contains('new blog').click()
+            cy.get('#logout')
+            cy.get('#title').type(blogTitle)
+            cy.get('#author').type('Konrad Konkel')
+            cy.get('#url').type('somerandomurl.org')
+            cy.get('#create').click()
+            cy.contains(blogTitle)
+            cy.get('#view').click()
+            cy.get('#remove').click()
+            cy.contains(blogTitle).should('not.exist')
         })
       })
   })

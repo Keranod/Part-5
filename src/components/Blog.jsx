@@ -54,7 +54,7 @@ const Blog = ({ blog, likeBlog, deleteBlog, loggedUser }) => {
                 likes {blog.likes}
                 <button id='like' onClick={() => handleLikeBlog(blog)}>like</button><br/>
                 {blog.user.name}<br/>
-                <button style={{ display: showRemoveButton }} onClick={() => handleDeleteBlog(blog)}>remove</button>
+                <button id='remove' style={{ display: showRemoveButton }} onClick={() => handleDeleteBlog(blog)}>remove</button>
             </div>
         </div>
     )}
