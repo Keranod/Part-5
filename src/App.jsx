@@ -155,7 +155,7 @@ const App = () => {
             <form onSubmit={handleLogout}>
                 <p>
                     {user.name} logged in
-                    <button type='submit'>logout</button>
+                    <button id='logout' type='submit'>logout</button>
                 </p>
             </form>
             {blogForm()}
