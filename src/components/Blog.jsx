@@ -47,12 +47,12 @@ const Blog = ({ blog, likeBlog, deleteBlog, loggedUser }) => {
         <div style={blogStyle}>
             <div>
                 {blog.title} {blog.author}
-                <button onClick={toggleViewDetails}>view</button>
+                <button id='view' onClick={toggleViewDetails}>view</button>
             </div>
             <div style={{ display: viewDetails }} className='viewDetails'>
                 {blog.url}<br/>
                 likes {blog.likes}
-                <button onClick={() => handleLikeBlog(blog)}>like</button><br/>
+                <button id='like' onClick={() => handleLikeBlog(blog)}>like</button><br/>
                 {blog.user.name}<br/>
                 <button style={{ display: showRemoveButton }} onClick={() => handleDeleteBlog(blog)}>remove</button>
             </div>
